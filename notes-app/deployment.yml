@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-dep
+  namespace: ipl
+  labels:
+    app: notes-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-app
+  template:
+    metadata:
+      labels:
+        app: notes-app
+    spec:
+      containers:
+      - name: notes-app
+        image: saipiske25/notes-app:latest
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: my-data
+          mountPath: /notes-data
+
+      volumes:
+      - name: my-data
+        persistentVolumeClaim:
+          claimName: notes-pvc
+

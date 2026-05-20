@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-dep
+  namespace: ipl
+  labels:
+    app: mi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mi
+  template:
+    metadata:
+      labels:
+        app: mi
+    spec:
+      containers:
+      - name: mi
+        image: saipiske25/ipl-docker-images:mumbai-indians
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: my-date
+          mountPath: /shruti
+
+      volumes:
+      - name: my-date
+        persistentVolumeClaim:
+          claimName: mi-pvc
+
