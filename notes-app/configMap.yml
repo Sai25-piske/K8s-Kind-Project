@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: ipl
+data:
+  DB_NAME: testdb
+  DB_USER: root
+  DB_PASSWORD: root
+  DB_HOST: mysql
+  DB_PORT: "3306"
